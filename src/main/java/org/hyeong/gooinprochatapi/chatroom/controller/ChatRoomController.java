@@ -8,10 +8,10 @@ import org.hyeong.gooinprochatapi.chatroom.dto.ChatRoomFindDTO;
 import org.hyeong.gooinprochatapi.chatroom.dto.ChatRoomListDTO;
 import org.hyeong.gooinprochatapi.chatroom.dto.ChatRoomOutDTO;
 import org.hyeong.gooinprochatapi.chatroom.service.ChatRoomService;
-import org.hyeong.gooinprochatapi.common.dto.PageRequestDTO;
-import org.hyeong.gooinprochatapi.common.dto.PageResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/chat/api/v1/chatroom")
@@ -40,12 +40,12 @@ public class ChatRoomController {
 
     //내 채팅방 리스트 get(paging 처리)
     @GetMapping("list/{email}")
-    public ResponseEntity<PageResponseDTO<ChatRoomListDTO>> chatRoomList(
-            @PathVariable String email, PageRequestDTO pageRequestDTO) {
+    public ResponseEntity<List<ChatRoomListDTO>> chatRoomList(
+            @PathVariable String email) {
 
         log.info(email);
 
-        return ResponseEntity.ok(chatRoomService.chatRoomListService(email, pageRequestDTO));
+        return ResponseEntity.ok(chatRoomService.chatRoomListService(email));
     }
 
     //채팅방 나가기

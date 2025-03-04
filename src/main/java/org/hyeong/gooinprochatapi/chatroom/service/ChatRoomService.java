@@ -10,8 +10,6 @@ import org.hyeong.gooinprochatapi.chatroom.dto.ChatRoomFindDTO;
 import org.hyeong.gooinprochatapi.chatroom.dto.ChatRoomListDTO;
 import org.hyeong.gooinprochatapi.chatroom.dto.ChatRoomOutDTO;
 import org.hyeong.gooinprochatapi.chatroom.repository.ChatRoomRepository;
-import org.hyeong.gooinprochatapi.common.dto.PageRequestDTO;
-import org.hyeong.gooinprochatapi.common.dto.PageResponseDTO;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -138,12 +136,8 @@ public class ChatRoomService {
     }
 
     //내 채팅방 리스트(페이징 포함)
-    public PageResponseDTO<ChatRoomListDTO> chatRoomListService(
-            String email, PageRequestDTO pageRequestDTO) {
-
-        int page = pageRequestDTO.getPage();
-        int size = pageRequestDTO.getSize();
-        int skip = (page - 1) * size;
+    public List<ChatRoomListDTO> chatRoomListService(
+            String email) {
 
         Criteria criteria = new Criteria().andOperator(
                 Criteria.where("participants").elemMatch(
@@ -154,18 +148,10 @@ public class ChatRoomService {
                 )
         );
 
-
         Query query = new Query(criteria)
-                .with(Sort.by(Sort.Order.desc("sentAt")))  // sentAt 기준 내림차순 정렬
-                .skip(skip)
-                .limit(size);
+                .with(Sort.by(Sort.Order.desc("sentAt"))); // sentAt 기준 내림차순 정렬
 
-        log.info(query);
-
-        List<ChatRoomListDTO> dtoList = mongoTemplate.find(query, ChatRoomListDTO.class);
-        int totalCount = (int)mongoTemplate.count(query, ChatRoomListDTO.class);    //limit 는 count 에 영향 안줌
-
-        return new PageResponseDTO<>(dtoList, pageRequestDTO, totalCount);
+        return mongoTemplate.find(query, ChatRoomListDTO.class);
     }
 
     //채팅방 나가기
