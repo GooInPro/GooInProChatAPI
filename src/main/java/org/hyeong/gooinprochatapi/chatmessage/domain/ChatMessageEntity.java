@@ -19,7 +19,7 @@ public class ChatMessageEntity {
     @Id
     private String id;
 
-    private String roomId;  //채팅방 id
+    private String roomId;  //채팅방 Id
 
     private String senderEmail;  //채팅 보낸 user email;
 

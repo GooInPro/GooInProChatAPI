@@ -135,7 +135,7 @@ public class ChatRoomService {
         return chatRoom;
     }
 
-    //내 채팅방 리스트(페이징 포함)
+    //내 채팅방 리스트
     public List<ChatRoomListDTO> chatRoomListService(
             String email) {
 
