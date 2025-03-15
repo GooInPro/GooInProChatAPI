@@ -13,7 +13,7 @@ public class ChatRoomListDTO {
 
     private String roomName;    //채팅방 이름
 
-    private String message; //마지막 메세지 내용
+    private String message; //마지막 메세지 내용 - join 필요(지금은 구현 안 돼있음)
 
     private Date sentAt;   //마지막 메세지 시간
 }
