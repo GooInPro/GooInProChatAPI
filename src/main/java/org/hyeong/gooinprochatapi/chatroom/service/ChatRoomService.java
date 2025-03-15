@@ -103,6 +103,7 @@ public class ChatRoomService {
                     List.of(createParticipant(chatRoomFindDTO.getSenderEmail()), createParticipant(chatRoomFindDTO.getRecipientEmail()));
 
             chatRoomAddDTO.setCreatedBy(chatRoomFindDTO.getSenderEmail());
+            chatRoomAddDTO.setRoomName(chatRoomFindDTO.getRoomName());
             chatRoomAddDTO.setParticipants(participants);
 
             chatRoom = addChatRoomService(chatRoomAddDTO);
