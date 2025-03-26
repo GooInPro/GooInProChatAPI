@@ -4,7 +4,7 @@ spring:
 
   data:
     mongodb:
-      uri: ${SPRING_DATA_MONGODB_URI}
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb://gooinprochatdbuser:gooinprochatdbuser@gooinprochatdb:27017/gooinprochatdb?authSource=gooinprochatdb}
 
   devtools:
     livereload:
@@ -12,3 +12,11 @@ spring:
 
   freemarker:
     cache: false
+
+server:
+  port: 8080
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: dlwogud
+    key-store-type: PKCS12
+    key-alias: selfsigned
